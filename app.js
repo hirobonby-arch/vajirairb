@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initSliderDots();
   initSearchTrigger();
+  initResearcherWizard();
 });
 
 // ================= MOBILE NAVIGATION =================
@@ -247,3 +248,163 @@ document.addEventListener('keydown', (e) => {
     closeTrainingModal();
   }
 });
+
+// ================= SECTION 1: RESEARCHER TOOLS (WIZARD & FORM TABS) =================
+function initResearcherWizard() {
+  const activeCard = document.querySelector('.wizard-opt-card.active');
+  if (activeCard) {
+    selectWizardType('exemption', activeCard);
+  }
+}
+
+const wizardData = {
+  'exemption': {
+    title: 'การพิจารณาแบบยกเว้น (Exemption Review)',
+    badgeText: 'Exemption Review',
+    badgeClass: 'badge-exemption',
+    timeText: 'ประมาณ 5 - 7 วันทำการ (ไม่ต้องรอรอบประชุม)',
+    description: 'เหมาะสำหรับโครงการวิจัยที่มีความเสี่ยงไม่เกินระดับต่ำสุด (Minimal Risk) เช่น งานวิจัยที่ใช้ข้อมูลเวชระเบียนย้อนหลัง หรือสิ่งส่งตรวจชีวภาพเดิมที่เหลือจากการตรวจรักษา โดยไม่สามารถระบุตัวตนของผู้ป่วยได้ (De-identified data)',
+    points: [
+      'ไม่มีการเก็บข้อมูลเพิ่มเติมหรือสัมผัสตัวผู้ป่วยโดยตรง',
+      'ข้อมูลที่นำมาบันทึกต้องตัดรหัสที่สามารถเชื่อมโยงกลับไปยังตัวตน (เช่น ชื่อ-สกุล, เลข HN, เลขบัตร ปชช.) ออกทั้งหมด',
+      'ต้องจัดทำแบบคำขอขอยกเว้นการขอความยินยอม (Waiver of Informed Consent) ควบคู่กับแบบบันทึกข้อมูล (CRF)'
+    ],
+    forms: [
+      'FM-01 แบบเสนอโครงการวิจัย',
+      'FM-05 แบบขอยกเว้น Informed Consent',
+      'CRF แบบบันทึกตัวแปรที่จัดเก็บ',
+      'โครงร่างการวิจัย (Proposal)'
+    ],
+    dlTab: 'chart-review'
+  },
+  'survey': {
+    title: 'การพิจารณาแบบยกเว้น / ความเสี่ยงต่ำสุด (Exemption / Minimal Risk)',
+    badgeText: 'Exemption / Minimal Risk',
+    badgeClass: 'badge-exemption',
+    timeText: 'ประมาณ 7 - 10 วันทำการ (ยื่นได้ตลอดทุกวันทำการ)',
+    description: 'เหมาะสำหรับงานวิจัยเชิงสำรวจ แบบสอบถาม สัมภาษณ์ หรือศึกษาพฤติกรรมในบุคคลทั่วไป ที่ไม่มีคำถามในประเด็นอ่อนไหวและไม่ก่อให้เกิดผลกระทบทางจิตใจ สังคม หรือกฎหมายต่ออาสาสมัคร',
+    points: [
+      'แบบสอบถามต้องไม่บันทึกข้อมูลที่ระบุตัวตนผู้ตอบ (Anonymous Survey)',
+      'มีเอกสารชี้แจงวัตถุประสงค์และระบุสิทธิของอาสาสมัครในการเลือกตอบหรือไม่ตอบได้อย่างอิสระ',
+      'การกด "ยอมรับ" ใน Google Forms หรือการส่งแบบสอบถามกลับถือเป็นการให้ความยินยอมโดยปริยาย'
+    ],
+    forms: [
+      'FM-01 แบบเสนอโครงการวิจัย',
+      'ICF-SURVEY เอกสารชี้แจงอาสาสมัคร',
+      'ชุดคำถาม/แบบสอบถามฉบับจริงทุกข้อ',
+      'คู่มือการวิจัยและเอกสารแนบ'
+    ],
+    dlTab: 'survey'
+  },
+  'expedited': {
+    title: 'การพิจารณาแบบเร็ว (Expedited Review)',
+    badgeText: 'Expedited Review',
+    badgeClass: 'badge-expedited',
+    timeText: 'ประมาณ 15 - 20 วันทำการ (ยื่นได้ตลอดทุกวันทำการ)',
+    description: 'เหมาะสำหรับโครงการวิจัยที่มีความเสี่ยงต่ำ โดยมีการเก็บสิ่งส่งตรวจที่ไม่รุกล้ำ เช่น เจาะเลือดในปริมาณปลอดภัย (ผู้ใหญ่ไม่เกิน 50 มล.), เก็บน้ำลาย, ปัสสาวะ, การตรวจคลื่นไฟฟ้าหัวใจ (ECG), อัลตราซาวด์ หรือการทดสอบสมรรถภาพทางกายภาพทั่วไป',
+    points: [
+      'กรรมการผู้เชี่ยวชาญ 2-3 ท่านร่วมประเมิน โดยไม่ต้องรอรอบเข้าที่ประชุมใหญ่',
+      'ต้องมีเอกสารชี้แจงอาสาสมัคร (ICF) และหนังสือแสดงความยินยอมเป็นลายลักษณ์อักษรที่เข้าใจง่าย',
+      'หากมีข้อเสนอแนะในการแก้ไข สำนักงานจะออกหนังสือแจ้งทางอีเมลเพื่อให้นักวิจัยปรับปรุง'
+    ],
+    forms: [
+      'FM-01 แบบเสนอโครงการวิจัย',
+      'ICF เอกสารชี้แจงและแสดงความยินยอม',
+      'VIRB Smart Checklist ตรวจสอบเอกสาร',
+      'ประวัติผู้วิจัยและใบรับรอง GCP/HSP'
+    ],
+    dlTab: 'specimen'
+  },
+  'fullboard': {
+    title: 'การพิจารณาในที่ประชุมใหญ่ (Full Board Review)',
+    badgeText: 'Full Board Review',
+    badgeClass: 'badge-fullboard',
+    timeText: 'ตามรอบประชุมประจำเดือน (ยื่นก่อนวันที่ 15 ของเดือน)',
+    description: 'สำหรับงานวิจัยที่มีความเสี่ยงมากกว่าระดับต่ำสุด (More than minimal risk) ได้แก่ การทดลองยา วัคซีน สารเคมี อุปกรณ์การแพทย์ใหม่ การผ่าตัดหรือหัตถการใหม่ หรือการวิจัยในกลุ่มเปราะบาง (เด็ก, ผู้ป่วยวิกฤต, หญิงตั้งครรภ์, ผู้ต้องขัง)',
+    points: [
+      'โครงการต้องนำเข้าพิจารณาในการประชุมคณะกรรมการชุดใหญ่ประจำเดือน (สัปดาห์ที่ 4 ของเดือน)',
+      'มีคณะกรรมการหลากหลายสาขาทั้งแพทย์ เภสัชกร นักวิทยาศาสตร์ นักกฎหมาย และผู้แทนภาคประชาชนร่วมอภิปราย',
+      'ต้องมีแผนการดูแลรักษาความปลอดภัย แผนประกันภัย และการรายงานเหตุการณ์ไม่พึงประสงค์ (SAE) อย่างเข้มงวด'
+    ],
+    forms: [
+      'FM-01-FULL แบบเสนอโครงการฉบับเต็ม',
+      'ICF & Assent เอกสารชี้แจงและยินยอม',
+      'Investigator Brochure (IB) หรือเอกสารกำกับยา',
+      'แผนการรายงาน SAE / SUSAR'
+    ],
+    dlTab: 'clinical'
+  }
+};
+
+function selectWizardType(typeKey, cardElement) {
+  const cards = document.querySelectorAll('.wizard-opt-card');
+  cards.forEach(card => card.classList.remove('active'));
+
+  if (cardElement) {
+    cardElement.classList.add('active');
+  }
+
+  const data = wizardData[typeKey] || wizardData['exemption'];
+  const resultBox = document.getElementById('wizardResultBox');
+  if (!resultBox) return;
+
+  const pointsHtml = data.points.map(pt => `<li><i class="fa-solid fa-check"></i> <span>${pt}</span></li>`).join('');
+  const formsHtml = data.forms.map(fm => `<span class="form-pill"><i class="fa-solid fa-file-lines"></i> ${fm}</span>`).join('');
+
+  resultBox.innerHTML = `
+    <div class="wiz-res-header">
+      <div class="wiz-res-title-wrap">
+        <span class="wiz-res-badge ${data.badgeClass}">${data.badgeText}</span>
+        <h4 class="wiz-res-title">${data.title}</h4>
+      </div>
+      <div class="wiz-res-time">
+        <i class="fa-regular fa-clock"></i>
+        <span>ระยะเวลา: ${data.timeText}</span>
+      </div>
+    </div>
+
+    <div class="wiz-res-body-grid">
+      <div class="wiz-criteria">
+        <h5><i class="fa-solid fa-circle-info" style="color: var(--primary-green);"></i> เกณฑ์การพิจารณา</h5>
+        <p>${data.description}</p>
+        <ul class="wiz-points">
+          ${pointsHtml}
+        </ul>
+      </div>
+
+      <div class="wiz-forms-needed">
+        <h5><i class="fa-solid fa-list-check" style="color: var(--primary-green);"></i> ชุดแบบฟอร์มสำคัญที่ต้องเตรียม</h5>
+        <div class="wiz-form-pills">
+          ${formsHtml}
+        </div>
+        <div class="wiz-actions">
+          <a href="#categorized-forms" onclick="switchFormTab('${data.dlTab}', document.querySelector('.form-tab-btn[onclick*=\\'${data.dlTab}\\']'))" class="btn-primary-pill" style="padding: 9px 18px; font-size: 0.88rem;">
+            <i class="fa-solid fa-download"></i>
+            <span>ไปที่หมวดดาวน์โหลดแบบฟอร์มนี้</span>
+          </a>
+          <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/virb-smart-checklist" target="_blank" rel="noopener" class="btn-secondary-pill" style="padding: 9px 16px; font-size: 0.88rem;">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Smart Checklist</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function switchFormTab(tabKey, buttonElement) {
+  const buttons = document.querySelectorAll('.form-tab-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+
+  if (buttonElement) {
+    buttonElement.classList.add('active');
+  }
+
+  const panels = document.querySelectorAll('.form-tab-panel');
+  panels.forEach(p => p.classList.remove('active'));
+
+  const targetPanel = document.getElementById('tab-' + tabKey);
+  if (targetPanel) {
+    targetPanel.classList.add('active');
+  }
+}

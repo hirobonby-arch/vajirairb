@@ -82,23 +82,33 @@
 
           <!-- สำหรับนักวิจัย (Dropdown) -->
           <li class="nav-item dropdown">
-            <a href="#researcher" class="nav-link dropdown-toggle">
+            <a href="#researcher-tools" class="nav-link dropdown-toggle">
               สำหรับนักวิจัย <i class="fa-solid fa-chevron-down nav-arrow"></i>
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="https://sites.google.com/nmu.ac.th/vajirairb/คมอนกวจย" target="_blank" rel="noopener">
-                  <i class="fa-solid fa-book-open-reader"></i> คู่มือนักวิจัย (Researcher's Guide)
+                <a href="#review-wizard">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> ช่วยเลือกประเภทการยื่น (Review Navigator)
                 </a>
               </li>
               <li>
-                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener">
-                  <i class="fa-solid fa-file-lines"></i> แบบฟอร์มทั้งหมด (Forms)
+                <a href="#meeting-calendar">
+                  <i class="fa-solid fa-calendar-check"></i> ปฏิทินและวันปิดรับเอกสาร (Cut-off Dates)
+                </a>
+              </li>
+              <li>
+                <a href="#categorized-forms">
+                  <i class="fa-solid fa-folder-open"></i> แบบฟอร์มแยกตามประเภทวิจัย
                 </a>
               </li>
               <li>
                 <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/virb-smart-checklist" target="_blank" rel="noopener">
                   <i class="fa-solid fa-list-check"></i> VIRB Smart Checklist (ตรวจสอบความพร้อม)
+                </a>
+              </li>
+              <li>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/คมอนกวจย" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-book-open-reader"></i> คู่มือนักวิจัยฉบับเต็ม (Researcher's Guide)
                 </a>
               </li>
             </ul>
@@ -317,6 +327,372 @@
       </div>
     </div>
   </section>
+
+
+  <!-- ================= SECTION 1: RESEARCHER WORKFLOW & TOOLS ================= -->
+  <section class="researcher-hub-section" id="researcher-tools">
+    <div class="section-container">
+      <div class="hub-header">
+        <span class="section-badge"><i class="fa-solid fa-compass"></i> เครื่องมือช่วยเหลือนักวิจัย</span>
+        <h2 class="hub-main-title">ศูนย์สนับสนุนและเตรียมความพร้อมก่อนยื่นโครงการวิจัย</h2>
+        <p class="hub-subtitle">
+          อำนวยความสะดวกให้นักวิจัยตั้งแต่การประเมินประเภทการยื่น ตรวจสอบรอบเดดไลน์ ไปจนถึงการดาวน์โหลดชุดแบบฟอร์มที่ตรงตามประเภทงานวิจัย
+        </p>
+      </div>
+
+      <!-- 1.1 Decision Tree / Review Type Navigator -->
+      <div class="wizard-container" id="review-wizard">
+        <div class="wizard-header">
+          <div class="wizard-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> ระบบช่วยประเมินอัตโนมัติ</div>
+          <h3 class="wizard-title">โครงการของคุณควรยื่นพิจารณาประเภทใด?</h3>
+          <p class="wizard-desc">คลิกเลือกลักษณะงานวิจัยของท่านด้านล่าง เพื่อดูประเภทการพิจารณา ระยะเวลา และชุดแบบฟอร์มที่ต้องใช้ทันที</p>
+        </div>
+
+        <div class="wizard-options-grid">
+          <!-- Option 1: Retrospective / Secondary data -->
+          <div class="wizard-opt-card active" onclick="selectWizardType('exemption', this)">
+            <div class="opt-icon"><i class="fa-solid fa-folder-closed"></i></div>
+            <div class="opt-content">
+              <h4>เวชระเบียนย้อนหลัง / ข้อมูลทุติยภูมิ</h4>
+              <p>ใช้ข้อมูลหรือสิ่งส่งตรวจเดิมที่มีอยู่แล้ว โดยไม่สามารถระบุตัวตนของเจ้าของข้อมูลได้ (De-identified data)</p>
+            </div>
+            <div class="opt-check"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+
+          <!-- Option 2: Survey / Questionnaire -->
+          <div class="wizard-opt-card" onclick="selectWizardType('survey', this)">
+            <div class="opt-icon"><i class="fa-solid fa-clipboard-question"></i></div>
+            <div class="opt-content">
+              <h4>แบบสอบถาม / สัมภาษณ์ / พฤติกรรม</h4>
+              <p>ไม่มีการกระทำรุกล้ำทางกายภาพ ไม่ถามประเด็นอ่อนไหว มีความเสี่ยงไม่เกินระดับต่ำสุด (Minimal risk)</p>
+            </div>
+            <div class="opt-check"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+
+          <!-- Option 3: Low-risk specimen / Minimal Intervention -->
+          <div class="wizard-opt-card" onclick="selectWizardType('expedited', this)">
+            <div class="opt-icon"><i class="fa-solid fa-vial-virus"></i></div>
+            <div class="opt-content">
+              <h4>เจาะเลือดปริมาณน้อย / เก็บสิ่งส่งตรวจไม่รุกล้ำ</h4>
+              <p>เจาะเลือดปริมาณปลอดภัย เก็บน้ำลาย ปัสสาวะ หรือการทดสอบสมรรถภาพทางกายภาพทั่วไป</p>
+            </div>
+            <div class="opt-check"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+
+          <!-- Option 4: Clinical Trial / High risk -->
+          <div class="wizard-opt-card" onclick="selectWizardType('fullboard', this)">
+            <div class="opt-icon"><i class="fa-solid fa-pills"></i></div>
+            <div class="opt-content">
+              <h4>ทดลองทางคลินิก (ยา / อุปกรณ์) หรือกลุ่มเปราะบาง</h4>
+              <p>มีการให้ยาใหม่ วัคซีน อุปกรณ์การแพทย์ สารรังสี หรือวิจัยในเด็ก ผู้ป่วยวิกฤต สตรีมีครรภ์ ผู้ต้องขัง</p>
+            </div>
+            <div class="opt-check"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+        </div>
+
+        <!-- Wizard Dynamic Result Box -->
+        <div id="wizardResultBox" class="wizard-result-card">
+          <!-- Populated by JavaScript with instant feedback -->
+        </div>
+      </div>
+
+      <!-- 1.2 Submission Deadline & Meeting Calendar -->
+      <div class="calendar-section-wrapper" id="meeting-calendar">
+        <div class="calendar-card">
+          <div class="calendar-card-header">
+            <div class="cal-header-left">
+              <span class="cal-tag"><i class="fa-regular fa-calendar-check"></i> กำหนดการประจำปี 2567 - 2568</span>
+              <h3 class="cal-title">รอบการประชุมคณะกรรมการและวันปิดรับเอกสาร (Full Board Review)</h3>
+              <p class="cal-subtitle">สำหรับโครงการประเภท Expedited และ Exemption สามารถยื่นได้ตลอดทุกวันทำการ (ไม่ต้องรอรอบประชุม)</p>
+            </div>
+            <div class="cal-header-action">
+              <a href="https://sites.google.com/nmu.ac.th/vajirairb/กำหนดการประชม" target="_blank" rel="noopener" class="btn-secondary-pill" style="padding: 8px 18px; font-size: 0.88rem;">
+                <i class="fa-regular fa-calendar"></i>
+                <span>ดูปฏิทินตลอดทั้งปี</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Timeline Stepper of Submission Cycle -->
+          <div class="cycle-timeline">
+            <div class="cycle-step">
+              <div class="step-num">1</div>
+              <div class="step-info">
+                <h4>วันปิดรับเอกสาร (Cut-off)</h4>
+                <p class="step-highlight">วันที่ 15 ของทุกเดือน</p>
+                <small>ตรวจความสมบูรณ์และจัดส่งกรรมการ</small>
+              </div>
+            </div>
+            <div class="cycle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="cycle-step">
+              <div class="step-num">2</div>
+              <div class="step-info">
+                <h4>วันประชุมคณะกรรมการ</h4>
+                <p class="step-highlight">วันอังคาร สัปดาห์ที่ 4</p>
+                <small>ประชุมพิจารณาโครงการในที่ประชุมใหญ่</small>
+              </div>
+            </div>
+            <div class="cycle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="cycle-step">
+              <div class="step-num">3</div>
+              <div class="step-info">
+                <h4>แจ้งผลและส่งหนังสือรับรอง</h4>
+                <p class="step-highlight">ภายใน 7-10 วันทำการ</p>
+                <small>แจ้งผลทางอีเมลและดาวน์โหลดเอกสาร</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monthly Table Preview -->
+          <div class="meeting-table-responsive">
+            <table class="meeting-table">
+              <thead>
+                <tr>
+                  <th>รอบการประชุม</th>
+                  <th>วันปิดรับเอกสาร (Cut-off)</th>
+                  <th>วันประชุมคณะกรรมการ</th>
+                  <th>กำหนดแจ้งผลพิจารณา</th>
+                  <th>สถานะรอบ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row-current">
+                  <td><strong>ครั้งที่ 11/2567 (พ.ย. 67)</strong></td>
+                  <td>15 พฤศจิกายน 2567</td>
+                  <td>26 พฤศจิกายน 2567</td>
+                  <td>ภายใน 6 ธันวาคม 2567</td>
+                  <td><span class="round-status status-open"><i class="fa-solid fa-circle-dot"></i> เปิดรับเอกสาร</span></td>
+                </tr>
+                <tr>
+                  <td><strong>ครั้งที่ 12/2567 (ธ.ค. 67)</strong></td>
+                  <td>13 ธันวาคม 2567</td>
+                  <td>24 ธันวาคม 2567</td>
+                  <td>ภายใน 7 มกราคม 2568</td>
+                  <td><span class="round-status status-upcoming">เร็วๆ นี้</span></td>
+                </tr>
+                <tr>
+                  <td><strong>ครั้งที่ 1/2568 (ม.ค. 68)</strong></td>
+                  <td>15 มกราคม 2568</td>
+                  <td>28 มกราคม 2568</td>
+                  <td>ภายใน 7 กุมภาพันธ์ 2568</td>
+                  <td><span class="round-status status-upcoming">เร็วๆ นี้</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.3 Categorized Form Repository -->
+      <div class="forms-repository-wrapper" id="categorized-forms">
+        <div class="repo-header">
+          <div>
+            <span class="section-badge"><i class="fa-regular fa-folder-open"></i> แบบฟอร์มแยกตามประเภทวิจัย</span>
+            <h3 class="repo-title">คลังดาวน์โหลดแบบฟอร์มวิจัย (พร้อมตัวอย่างการกรอก)</h3>
+            <p class="repo-subtitle">เลือกประเภทงานวิจัยของท่านเพื่อดาวน์โหลดชุดเอกสารและแบบฟอร์มที่เกี่ยวข้องได้อย่างครบถ้วน</p>
+          </div>
+          <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-primary-pill" style="padding: 9px 20px; font-size: 0.9rem;">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+            <span>ดาวน์โหลดแบบฟอร์มทั้งหมด</span>
+          </a>
+        </div>
+
+        <!-- Form Category Tabs -->
+        <div class="form-tabs-bar">
+          <button class="form-tab-btn active" onclick="switchFormTab('chart-review', this)">
+            <i class="fa-solid fa-book-medical"></i> เวชระเบียนย้อนหลัง
+          </button>
+          <button class="form-tab-btn" onclick="switchFormTab('survey', this)">
+            <i class="fa-solid fa-clipboard-question"></i> แบบสอบถาม / พฤติกรรม
+          </button>
+          <button class="form-tab-btn" onclick="switchFormTab('clinical', this)">
+            <i class="fa-solid fa-capsules"></i> การทดลองทางคลินิก (Clinical Trial)
+          </button>
+          <button class="form-tab-btn" onclick="switchFormTab('specimen', this)">
+            <i class="fa-solid fa-dna"></i> ตัวอย่างชีวภาพ / Biobank
+          </button>
+        </div>
+
+        <!-- Tab 1 Content: Chart Review -->
+        <div id="tab-chart-review" class="form-tab-panel active">
+          <div class="forms-grid">
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">FM-01-VJR</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">แบบเสนอเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในมนุษย์ (Initial Submission Form)</h4>
+              <p class="form-desc">แบบฟอร์มหลักระบุรายละเอียดโครงการ หัวหน้าโครงการ และวัตถุประสงค์การวิจัย</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">FM-05-WAIVER</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">แบบคำขอขอยกเว้นการขอความยินยอม (Request for Waiver of Informed Consent)</h4>
+              <p class="form-desc">สำหรับงานวิจัยที่ใช้ข้อมูลเวชระเบียนย้อนหลัง โดยไม่สามารถติดต่อขอความยินยอมจากผู้ป่วยได้</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">CRF-TEMPLATE</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">แบบฟอร์มบันทึกข้อมูลการวิจัย (Case Record Form / Data Extraction Sheet)</h4>
+              <p class="form-desc">แบบฟอร์มบันทึกตัวแปรที่จะเก็บจากเวชระเบียน (ต้องไม่มีชื่อ-สกุล หรือ HN ที่ระบุตัวตน)</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2 Content: Survey -->
+        <div id="tab-survey" class="form-tab-panel">
+          <div class="forms-grid">
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">FM-01-VJR</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">แบบเสนอเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในมนุษย์ (Initial Submission Form)</h4>
+              <p class="form-desc">แบบฟอร์มหลักสำหรับการยื่นเสนอโครงการประเภทแบบสอบถามและการสัมภาษณ์</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">ICF-SURVEY</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">เอกสารชี้แจงและแสดงความยินยอมสำหรับแบบสอบถาม (Information Sheet & Consent)</h4>
+              <p class="form-desc">เอกสารชี้แจงวัตถุประสงค์ ประโยชน์ สิทธิของผู้ตอบ และการไม่ระบุตัวตน (Anonymous)</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">QUESTIONNAIRE-VJR</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">ชุดแบบสอบถามและแบบสัมภาษณ์ฉบับสมบูรณ์ (Questionnaire Tools)</h4>
+              <p class="form-desc">แบบสอบถามทุกข้อที่จะใช้กับอาสาสมัคร พร้อมระบุเวอร์ชันและวันที่กำกับ</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3 Content: Clinical Trial -->
+        <div id="tab-clinical" class="form-tab-panel">
+          <div class="forms-grid">
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">FM-01-FULL</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">แบบเสนอโครงการวิจัยทดลองทางคลินิก (Clinical Trial Full Submission Form)</h4>
+              <p class="form-desc">แบบเสนอโครงการวิจัยฉบับเต็มสำหรับงานวิจัยที่มียา วัคซีน อุปกรณ์การแพทย์ หรือหัตถการใหม่</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">ICF-ADULT-VJR</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">เอกสารชี้แจงอาสาสมัครและหนังสือแสดงความยินยอม (Adult ICF & Consent Form)</h4>
+              <p class="form-desc">เทมเพลตมาตรฐานตามเกณฑ์ GCP ครอบคลุมความเสี่ยง ผลข้างเคียง และการดูแลรักษาพยาบาล</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">IB-SAFETY-DOC</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">คู่มือนักวิจัยทางคลินิกและแผนความปลอดภัย (Investigator's Brochure & Safety Plan)</h4>
+              <p class="form-desc">เอกสารกำกับยา/เครื่องมือแพทย์ ข้อมูลความปลอดภัย และแนวทางรายงานเหตุการณ์ไม่พึงประสงค์ (SAE)</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4 Content: Biospecimen -->
+        <div id="tab-specimen" class="form-tab-panel">
+          <div class="forms-grid">
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">FM-01-SPECIMEN</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">แบบเสนอโครงการวิจัยที่ใช้ตัวอย่างชีวภาพ (Biospecimen Research Submission)</h4>
+              <p class="form-desc">สำหรับงานวิจัยที่เก็บ เลือด ชิ้นเนื้อ สารคัดหลั่ง หรือสิ่งส่งตรวจทางพยาธิวิทยา</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">MTA-AGREEMENT</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">ข้อตกลงการถ่ายโอนวัสดุชีวภาพ (Material Transfer Agreement: MTA)</h4>
+              <p class="form-desc">กรณีมีการส่งต่อตัวอย่างชีวภาพออกนอกคณะแพทยศาสตร์วชิรพยาบาล หรือส่งตรวจต่างประเทศ</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="form-item-card">
+              <div class="form-item-header">
+                <span class="form-code">BIOBANK-CONSENT</span>
+                <span class="sample-tag"><i class="fa-regular fa-star"></i> มีตัวอย่าง</span>
+              </div>
+              <h4 class="form-name">หนังสือแสดงความยินยอมการจัดเก็บตัวอย่างในคลังชีวภาพ (Biobanking Consent)</h4>
+              <p class="form-desc">เอกสารขอความยินยอมเพื่อเก็บรักษาตัวอย่างชีวภาพไว้ใช้งานวิจัยในอนาคต</p>
+              <div class="form-item-actions">
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl"><i class="fa-regular fa-file-word"></i> Word (.docx)</a>
+                <a href="https://sites.google.com/nmu.ac.th/vajirairb/แบบฟอรม/forms" target="_blank" rel="noopener" class="btn-form-dl dl-pdf"><i class="fa-regular fa-file-pdf"></i> PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 
   <!-- ================= MIDDLE SECTION: NEWS & LIVE STATUS CHECK ================= -->
   <section class="news-and-search-section" id="news">
